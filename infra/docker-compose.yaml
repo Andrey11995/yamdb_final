@@ -9,15 +9,14 @@ services:
       - ./.env
 
   web:
-    build: ../api_yamdb/
-    restart: always
+    image: andrey11995/yamdb_final:latest
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
     depends_on:
       - db
     env_file:
-      - ./.env 
+      - ./.env
 
   nginx:
     image: nginx:1.21.3-alpine
