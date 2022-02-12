@@ -9,8 +9,8 @@ services:
       - ./.env
 
   web:
-    image: andrey11995/yamdb_final:latest
     build: ../api_yamdb/
+    image: andrey11995/yamdb_final:latest
     restart: always
     volumes:
       - static_value:/app/static/
