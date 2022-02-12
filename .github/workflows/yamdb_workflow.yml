@@ -38,9 +38,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Push to Docker Hub
-        run: |
-          cd api_yamdb/
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2 -f C:\api_yamdb\Dockerfile
         with:
           push: true
           tags: andrey11995/yamdb_final:latest
