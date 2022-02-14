@@ -9,7 +9,7 @@ services:
       - ./.env
 
   web:
-    build: ../yamdb_final/
+    build: yamdb_final/api_yamdb/
     image: andrey11995/yamdb_final:latest
     restart: always
     volumes:
