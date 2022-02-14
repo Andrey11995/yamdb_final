@@ -20,11 +20,11 @@
 Клонировать репозиторий и перейти в директорию с файлом docker-compose.yaml:
 
 ```
-git clone https://github.com/Andrey11995/infra_sp2
+git clone https://github.com/Andrey11995/yamdb_final
 ```
 
 ```
-cd infra_sp2/infra/
+cd yamdb_final/infra/
 ```
 
 Собрать проект в контейнеры и запустить:
@@ -86,3 +86,4 @@ docker-compose exec web python manage.py load_data
 #### SQLite
 #### Gunicorn, Nginx
 #### Docker, Docker-compose
+#### CI и CD
