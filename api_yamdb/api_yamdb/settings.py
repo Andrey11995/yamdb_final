@@ -13,8 +13,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '51.250.16.74',
-    'yatube.sytes.net',
+    '84.201.153.218',
 ]
 
 # Application definition
