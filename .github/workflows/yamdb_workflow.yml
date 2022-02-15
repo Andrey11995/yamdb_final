@@ -74,8 +74,14 @@ jobs:
     needs: deploy
     steps:
       - name: Migrations
-        run: |
-          sudo docker-compose exec web python manage.py migrate
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            sudo docker-compose exec web python manage.py migrate
 
   send_message:
     name: Send message to Telegram
