@@ -16,6 +16,7 @@ ROLES = (
 
 
 class User(AbstractUser):
+    """Модель пользователя."""
     username = models.CharField(
         max_length=150,
         unique=True,
@@ -80,6 +81,7 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
+    """Модель категории произведения."""
     name = models.CharField(max_length=256, verbose_name='Категория')
     slug = models.SlugField(
         unique=True,
@@ -97,6 +99,7 @@ class Category(models.Model):
 
 
 class Genre(models.Model):
+    """Модель жанра произведения."""
     name = models.CharField(max_length=256, verbose_name='Жанр')
     slug = models.SlugField(
         unique=True,
@@ -114,6 +117,7 @@ class Genre(models.Model):
 
 
 class Title(models.Model):
+    """Модель произведения."""
     name = models.CharField(max_length=256, verbose_name='Название')
     year = models.IntegerField(
         validators=[
@@ -149,6 +153,7 @@ class Title(models.Model):
 
 
 class Review(models.Model):
+    """Модель отзыва."""
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -190,6 +195,7 @@ class Review(models.Model):
 
 
 class Comment(models.Model):
+    """Модель комментария к отзыву."""
     text = models.TextField(verbose_name='Комментарий')
     author = models.ForeignKey(
         User,

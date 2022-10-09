@@ -6,12 +6,14 @@
 
 ## Наполнение env-файла:
 
-- DB_ENGINE=django.db.backends.postgresql - используемая БД
-- DB_NAME=postgres - имя БД
-- POSTGRES_USER - логин для подключения к БД
-- POSTGRES_PASSWORD - пароль для подключения к БД
-- DB_HOST - название сервиса (контейнера)
-- DB_PORT -  порт для подключения к БД
+- SECRET_KEY - секретный ключ Django;
+- DEBUG - 1 - вкл, 0 - выкл;
+- ALLOWED_HOSTS - список доступных хостов через запятую без пробела (localhost,127.0.0.1);
+- POSTGRES_USER - логин для подключения к БД;
+- POSTGRES_PASSWORD - пароль для подключения к БД;
+- POSTGRES_DB - название базы данных;
+- DB_HOST - название сервиса (контейнера);
+- DB_PORT - порт для подключения к БД;
 
 
 ## Как запустить проект в контейнерах:
@@ -26,23 +28,18 @@ git clone https://github.com/Andrey11995/yamdb_final
 cd yamdb_final/infra/
 ```
 
-Собрать проект в контейнеры и запустить:
+Создать файл .env и наполнить его данными:
+
+```
+touch .env && nano .env
+```
+
+Запустить Docker-compose:
 
 ```
 docker-compose up -d --build
 ```
-
-Выполнить миграции:
-
-```
-docker-compose exec web python manage.py migrate
-```
-
-Собрать статические файлы:
-
-```
-docker-compose exec web python manage.py collectstatic --no-input
-```
+Проект развернут и запущен, миграции, сборка статики и наполнение БД ингредиентами автоматизированы
 
 Создать суперпользователя:
 

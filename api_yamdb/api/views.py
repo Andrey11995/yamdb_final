@@ -19,6 +19,7 @@ class CreateListDestroyViewSet(mixins.CreateModelMixin,
                                mixins.ListModelMixin,
                                mixins.DestroyModelMixin,
                                viewsets.GenericViewSet):
+    """ViewSet с методами GET (list), POST и DELETE."""
     lookup_field = 'slug'
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name',)
@@ -27,6 +28,7 @@ class CreateListDestroyViewSet(mixins.CreateModelMixin,
 
 @api_view(['POST'])
 def register_view(request):
+    """Регистрация пользователей."""
     serializer = serializers.RegisterSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     email = serializer.validated_data.get('email')
@@ -62,6 +64,7 @@ def register_view(request):
 
 @api_view(['POST'])
 def token_view(request):
+    """Проверка кода потверждения и выдача токена авторизации."""
     serializer = serializers.TokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     user = get_object_or_404(
@@ -80,6 +83,10 @@ def token_view(request):
 
 
 class UserViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet пользователей
+    Методы: GET (list, retrieve), POST, PATCH, DELETE.
+    """
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
     lookup_field = 'username'
@@ -92,6 +99,7 @@ class UserViewSet(viewsets.ModelViewSet):
         permission_classes=[permissions.IsAuthenticated],
     )
     def get_self_user_page(self, request):
+        """Метод получения профиля текущего пользователя."""
         if request.method == 'GET':
             serializer = serializers.UserSerializer(request.user)
             return response.Response(
@@ -109,16 +117,28 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class CategoryViewSet(CreateListDestroyViewSet):
+    """
+    Получение, создание и удаление категорий произведений.
+    Методы: GET (list), POST, DELETE.
+    """
     queryset = Category.objects.all()
     serializer_class = serializers.CategorySerializer
 
 
 class GenreViewSet(CreateListDestroyViewSet):
+    """
+    Получение, создание и удаление жанров произведений.
+    Методы: GET (list), POST, DELETE.
+    """
     queryset = Genre.objects.all()
     serializer_class = serializers.GenreSerializer
 
 
 class TitleViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet произведений
+    Методы: GET (list, retrieve), POST, PATCH, DELETE.
+    """
     queryset = Title.objects.annotate(
         rating=Avg('reviews__score')).order_by('-year')
     filter_backends = (DjangoFilterBackend,)
@@ -132,6 +152,10 @@ class TitleViewSet(viewsets.ModelViewSet):
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet отзывов
+    Методы: GET (list, retrieve), POST, PATCH, DELETE.
+    """
     serializer_class = serializers.ReviewSerializer
     permission_classes = [IsAuthorOrReadOnly | IsModeratorOrReadOnly]
 
@@ -146,6 +170,10 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet комментариев к отзывам
+    Методы: GET (list, retrieve), POST, PATCH, DELETE.
+    """
     serializer_class = serializers.CommentSerializer
     permission_classes = [IsAuthorOrReadOnly | IsModeratorOrReadOnly]
 

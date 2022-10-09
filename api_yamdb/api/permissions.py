@@ -2,7 +2,10 @@ from rest_framework import permissions
 
 
 class IsAuthorOrReadOnly(permissions.IsAuthenticated):
-
+    """
+    Полный доступ для авторизованного автора,
+    Для остальных только чтение.
+    """
     def has_permission(self, request, view):
         return (request.method in permissions.SAFE_METHODS
                 or request.user.is_authenticated)
@@ -13,7 +16,10 @@ class IsAuthorOrReadOnly(permissions.IsAuthenticated):
 
 
 class IsAdminOrReadOnly(permissions.IsAdminUser):
-
+    """
+    Полный доступ для администратора,
+    Для остальных только чтение.
+    """
     def has_permission(self, request, view):
         return ((request.user.is_authenticated
                 and request.user.is_admin())
@@ -26,7 +32,10 @@ class IsAdminOrReadOnly(permissions.IsAdminUser):
 
 
 class IsModeratorOrReadOnly(permissions.IsAdminUser):
-
+    """
+    Полный доступ для модератора,
+    Для остальных только чтение.
+    """
     def has_permission(self, request, view):
         return ((request.user.is_authenticated
                 and request.user.is_moderator())
@@ -39,7 +48,7 @@ class IsModeratorOrReadOnly(permissions.IsAdminUser):
 
 
 class IsOwnerOrIsAdmin(permissions.IsAdminUser):
-
+    """Доступ только для администратора и автора."""
     def has_permission(self, request, view):
         return (request.user.is_authenticated
                 and request.user.is_admin())
