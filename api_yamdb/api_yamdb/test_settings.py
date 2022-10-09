@@ -1,3 +1,5 @@
+"""Настройки для запуска тестов с БД SQLite."""
+
 import os
 from datetime import timedelta
 
@@ -5,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'secret')
 
-DEBUG = int(os.environ.get('DEBUG', 1))
+DEBUG = int(os.environ.get('DEBUG', 0))
 
 ALLOWED_HOSTS = ['*']
 
