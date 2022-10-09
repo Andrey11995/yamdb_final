@@ -47,7 +47,7 @@ docker-compose up -d --build
 ```
 docker-compose exec web python manage.py createsuperuser
 ```
-Ввести почту, логин, имя, фамилию и пароль.
+Ввести почту, имя пользователя и пароль.
 
 >❗️Внимание❗️ Команда выполняется только из директории, содержащей файл docker-compose.yml
 
