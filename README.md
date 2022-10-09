@@ -45,7 +45,7 @@ docker-compose up -d --build
 ### Создание суперпользователя:
 
 ```
-docker-compose exec backend python manage.py createsuperuser
+docker-compose exec web python manage.py createsuperuser
 ```
 Ввести почту, логин, имя, фамилию и пароль.
 
@@ -60,20 +60,14 @@ docker-compose exec backend python manage.py createsuperuser
 4. При желании пользователь отправляет PATCH-запрос на эндпоинт /api/v1/users/me/ и заполняет поля в своём профайле (описание полей — в документации).
 
 
-## Авторы
-
-### Над проектом работали:
-
-1. Яков Крис — Тимлид
-2. Максим Бубневич — Разработчик
-3. Андрей Завьялов — Разработчик
-
-
 ## Технологии
 
-#### Python
-#### Django REST Framework
-#### SQLite
-#### Gunicorn, Nginx
-#### Docker, Docker-compose
-#### CI и CD
+- Python 3.7
+- Django REST Framework
+- React
+- PostgreSQL, SQLite (для тестов)
+- Pytest
+- Docker
+- Nginx
+- Gunicorn
+- Github Workflow
