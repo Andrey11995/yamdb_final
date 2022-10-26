@@ -33,15 +33,13 @@ def register_view(request):
     serializer.is_valid(raise_exception=True)
     email = serializer.validated_data.get('email')
     username = serializer.validated_data.get('username')
-    users = User.objects.filter(email__iexact=email, username=username)
-    user = users.first()
-
-    if user is None:
+    user = User.objects.filter(email__iexact=email, username=username).first()
+    if not user:
         email_users = User.objects.filter(email__iexact=email)
         email_user = email_users.first()
         name_users = User.objects.filter(username=username)
         name_user = name_users.first()
-        if (email_user is not None or name_user is not None):
+        if email_user or name_user:
             return Response(
                 ('Аккаунт с таким именем пользователя '
                  'или почтой уже существует!'),
